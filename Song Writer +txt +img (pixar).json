@@ -1,0 +1,489 @@
+{
+  "name": "Song Writer +txt +img (pixar)",
+  "nodes": [
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "openai/gpt-oss-20b",
+          "mode": "list",
+          "cachedResultName": "openai/gpt-oss-20b"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        208,
+        208
+      ],
+      "id": "ad016eb7-b592-4bc4-a209-bb55935c0e88",
+      "name": "OpenAI Chat Model",
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "alwaysOutputData": true,
+      "credentials": {
+        "openAiApi": {
+          "id": "V1taozCJJj55U5by",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "openai/gpt-oss-20b",
+          "mode": "list",
+          "cachedResultName": "openai/gpt-oss-20b"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        528,
+        208
+      ],
+      "id": "69cbe29f-5171-43a3-bb6f-fef79f6c522c",
+      "name": "OpenAI Chat Model1",
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "alwaysOutputData": true,
+      "credentials": {
+        "openAiApi": {
+          "id": "V1taozCJJj55U5by",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Write a long, emotional, and detailed song (around 300 words) about: {{ $json.chatInput }}. Structure:\n\nVerse 1\n\nChorus\n\nVerse 2\n\nChorus\n\nBridge\n\nFinal Chorus\n\nOutro Ensure the lyrics are immersive and strictly follow the provided topic.",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "You are a professional songwriter specializing in SUNO AI structures. Your only task is to generate complete song lyrics based on the user's input. Do not provide any conversational text, explanations, or greetings. Output ONLY the lyrics with clear headings for Verse, Chorus, and Bridge. Use only alphabetic characters. Do not use genre names. Do not use colons (:), dashes (-), or underscores (_)."
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.8,
+      "position": [
+        208,
+        0
+      ],
+      "id": "65f0abb8-17c2-48d1-86b6-c2d1a63deec6",
+      "name": "Lyrics Writer",
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Write a creative song title based on these lyrics: {{ $node[\"Lyrics Writer\"]?.json?.text || $json.message.text }}",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "You are a professional song analyst. Your task is to provide ONLY the song title based on the input.\nBE extremely CREATIVE while creating unique titles.\nOutput only the title itself.\nDo not include quotes, explanations, prefixes like \"Title:\", or any other text.\nUse ONLY alphabetic characters, numeric characters, and spaces.\nSTRICTLY FORBIDDEN: Do not use colons (:), dashes (-), underscores (_), or special symbols."
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.8,
+      "position": [
+        528,
+        0
+      ],
+      "id": "b52e866d-0fde-473e-920f-026f5c441b00",
+      "name": "Title Maker",
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "openai/gpt-oss-20b",
+          "mode": "list",
+          "cachedResultName": "openai/gpt-oss-20b"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        832,
+        208
+      ],
+      "id": "2b201d05-6ad5-4c8b-8075-3ed162420c2f",
+      "name": "OpenAI Chat Model2",
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "alwaysOutputData": true,
+      "credentials": {
+        "openAiApi": {
+          "id": "V1taozCJJj55U5by",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "openai/gpt-oss-20b",
+          "mode": "list",
+          "cachedResultName": "openai/gpt-oss-20b"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        1136,
+        208
+      ],
+      "id": "e74e73ad-add2-4d8d-a6df-5ff653b948b6",
+      "name": "OpenAI Chat Model3",
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "alwaysOutputData": true,
+      "credentials": {
+        "openAiApi": {
+          "id": "V1taozCJJj55U5by",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Lyrics Writer').item.json.text }}",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "Role: Expert Stable Diffusion Prompt Generator.\nSpecialty: \"Samaritan 3D\" and \"Pixar/Disney\" animation styles.\n\nINPUT: Song Lyrics.\nOUTPUT: A single comma-separated string of English keywords optimized for AI image generation.\n\nYOUR PROCESS:\n1. DETECT MOOD: Read lyrics. Is it sad, happy, energetic, or romantic?\n2. CREATE CHARACTER: Invent a NON-HUMAN or STYLIZED funk/soul singer (e.g., a grooving robot, a cool lion in a suit, a cute alien diva, a funky teddy bear).\n3. SET SCENE: Translate the mood into a visual location (e.g., Sad = rainy neon street; Happy = colorful disco stage).\n\nSTRICT OUTPUT STRUCTURE (Comma Separated):\n[Main Character Description], [Action/Pose], [Environment], [Lighting/Mood], [Mandatory Style Tags]\n\nMANDATORY STYLE TAGS TO INCLUDE AT THE END:\nSamaritan 3D, Pixar style, Disney animation, cgsociety, Unreal Engine 5, Octane Render, 8k, volumetric lighting, clean focus.\n\nCRITICAL RULES:\n- NO sentences. Use only descriptive keywords (e.g., \"singing into microphone,\" not \"he is singing\").\n- NO text inside the image.\n- NO explanations. Output ONLY the prompt string.\n- Character must look \"cute but cool\" (Funk/Soul vibe).\n- NO missing fingers and body parts."
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.8,
+      "position": [
+        1136,
+        0
+      ],
+      "id": "c1ceb16b-76f2-4023-8961-31f0fb701b89",
+      "name": "Image Prompt",
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Analyze these lyrics and provide a brief music profile in English: {{ $node[\"Lyrics Writer\"]?.json?.text || $json.text }}\n\nFormat (Only 3-5 words per line):\n1. Genre: (tags only)\n2. Mood: (adjectives only)\n3. Instruments: (list only)\n4. Vocals: (style only)",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "You are a professional music analyst. Provide extremely concise technical tags only.\n- Do not use full sentences.\n- Limit each section to 3-5 keywords max.\n- Output must strictly follow the requested numbered format."
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.8,
+      "position": [
+        832,
+        0
+      ],
+      "id": "fa3c874c-8cb5-40c8-bc82-352a9ab31c59",
+      "name": "Genre & Style",
+      "alwaysOutputData": true,
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "duplicateItem": true,
+        "assignments": {
+          "assignments": [
+            {
+              "id": "442ef9f0-1dd9-4f00-9425-262fcf569fd2",
+              "name": "song_text",
+              "value": "=-Title:\n\n{{ $('Title Maker').item.json.text }}\n\n-----\n\n-Lyrics:\n\n{{ $('Lyrics Writer').item.json.text }}\n\n-----\n\n-Genre & Style:\n\n{{ $('Genre & Style').item.json.text }}\n\n-----\n\n-Image Prompt:\n\n{{ $('Image Prompt').item.json.text }}\n\n-----",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1424,
+        0
+      ],
+      "id": "f72ec362-df13-435f-b63a-ac4ae58c9e09",
+      "name": "Edit Fields1",
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "operation": "toText",
+        "sourceProperty": "song_text",
+        "options": {
+          "fileName": "={{ $('Title Maker').item.json.text }}"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        1584,
+        0
+      ],
+      "id": "fb4228e0-16be-4eae-a8fd-06fd81e51a82",
+      "name": "Convert to File1",
+      "alwaysOutputData": true,
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "fe1907ed-b659-4200-ba5b-09066dd03d67",
+      "name": "When chat message received",
+      "webhookId": "768a96da-5bc6-42ec-9c9f-1957182a4568"
+    },
+    {
+      "parameters": {
+        "jsCode": "const fs = require('fs');\n\n// ADIM 1: Spesifik Node'lardan verileri çekiyoruz\n// $('Node İsmi').first().json.DegiskenIsmi kalıbını kullanıyoruz.\n\n// 'Title Maker' kutusundan başlığı al (Eğer boşsa 'adsiz_sarki' olsun)\nconst hamBaslik = $('Title Maker').first().json.text || 'adsiz_sarki';\n\n// Dosya adına .txt uzantısı ekle (eğer gelen veride yoksa)\n// Böylece Windows'ta çift tıklayınca Not Defteri ile açılır.\nconst gelenDosyaAdi = hamBaslik.endsWith('.txt') ? hamBaslik : `${hamBaslik}.txt`;\n\n// 'Edit Fields1' kutusundan şarkı sözünü al\nconst gelenIcerik = $('Edit Fields1').first().json.song_text || 'İçerik bulunamadı';\n\n// ADIM 2: Dosya yolunu oluştur (/files klasörü Docker volume'udur)\nconst dosyaYolu = `/files/${gelenDosyaAdi}`;\n\ntry {\n  // ADIM 3: Dosyayı yaz\n  fs.writeFileSync(dosyaYolu, gelenIcerik);\n  \n  return {\n    json: {\n      durum: \"BASARILI\",\n      islem_zamani: new Date().toISOString(),\n      dosya_adi: gelenDosyaAdi,\n      kaydedilen_yol: dosyaYolu,\n      icerik_ozeti: gelenIcerik.substring(0, 30) + \"...\"\n    }\n  };\n} catch (error) {\n  return {\n    json: {\n      durum: \"HATA\",\n      mesaj: error.message,\n      ipucu: \"Node isimlerinin (Title Maker, Edit Fields1) harfiyen doğru olduğundan emin ol.\"\n    }\n  };\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1760,
+        0
+      ],
+      "id": "c6d18cf9-9591-462a-bc7d-d7b722444a6f",
+      "name": "Code in JavaScript",
+      "alwaysOutputData": true,
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "workflow": "={\n  \"3\": {\n    \"inputs\": {\n      \"seed\": {{ Math.floor(Math.random() * 10000000000000) }},\n      \"steps\": 30,\n      \"cfg\": 7,\n      \"sampler_name\": \"dpmpp_2m\",\n      \"scheduler\": \"karras\",\n      \"denoise\": 1,\n      \"model\": [ \"4\", 0 ],\n      \"positive\": [ \"6\", 0 ],\n      \"negative\": [ \"7\", 0 ],\n      \"latent_image\": [ \"5\", 0 ]\n    },\n    \"class_type\": \"KSampler\",\n    \"_meta\": { \"title\": \"KSampler\" }\n  },\n  \"4\": {\n    \"inputs\": {\n      \"ckpt_name\": \"samaritan3dCartoon_v40SDXL.safetensors\"\n    },\n    \"class_type\": \"CheckpointLoaderSimple\",\n    \"_meta\": { \"title\": \"Load Checkpoint\" }\n  },\n  \"5\": {\n    \"inputs\": {\n      \"width\": 1280,\n      \"height\": 720,\n      \"batch_size\": 1\n    },\n    \"class_type\": \"EmptyLatentImage\",\n    \"_meta\": { \"title\": \"Empty Latent Image\" }\n  },\n  \"6\": {\n    \"inputs\": {\n      \"text\": \"{{ $('Image Prompt').item.json.text }}\",\n      \"clip\": [ \"4\", 1 ]\n    },\n    \"class_type\": \"CLIPTextEncode\",\n    \"_meta\": { \"title\": \"CLIP Text Encode (Prompt)\" }\n  },\n  \"7\": {\n    \"inputs\": {\n      \"text\": \"text, watermark, low quality, bad anatomy, ugly, blurry, 2d, illustration, painting, anime\",\n      \"clip\": [ \"4\", 1 ]\n    },\n    \"class_type\": \"CLIPTextEncode\",\n    \"_meta\": { \"title\": \"CLIP Text Encode (Negative Prompt)\" }\n  },\n  \"8\": {\n    \"inputs\": {\n      \"samples\": [ \"3\", 0 ],\n      \"vae\": [ \"4\", 2 ]\n    },\n    \"class_type\": \"VAEDecode\",\n    \"_meta\": { \"title\": \"VAE Decode\" }\n  },\n  \"10\": {\n    \"inputs\": {\n      \"model_name\": \"4xUltrasharp_4xUltrasharpV10.pt\"\n    },\n    \"class_type\": \"UpscaleModelLoader\",\n    \"_meta\": { \"title\": \"Load Upscale Model\" }\n  },\n  \"11\": {\n    \"inputs\": {\n      \"upscale_model\": [ \"10\", 0 ],\n      \"image\": [ \"8\", 0 ]\n    },\n    \"class_type\": \"ImageUpscaleWithModel\",\n    \"_meta\": { \"title\": \"Upscale Image (using Model)\" }\n  },\n  \"9\": {\n    \"inputs\": {\n      \"filename_prefix\": \"{{ $('Title Maker').item.json.text }}-pixar\",\n      \"images\": [ \"11\", 0 ]\n    },\n    \"class_type\": \"SaveImage\",\n    \"_meta\": { \"title\": \"Save Image\" }\n  }\n}",
+        "outputFormat": "png",
+        "timeout": 222
+      },
+      "type": "n8n-nodes-comfyui.comfyui",
+      "typeVersion": 1,
+      "position": [
+        1952,
+        0
+      ],
+      "id": "813dc104-ac54-4789-bc2e-0801115a340d",
+      "name": "Samaritan",
+      "alwaysOutputData": true,
+      "retryOnFail": false,
+      "maxTries": 2,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "comfyUIApi": {
+          "id": "D4JS8elgWVdtLBiQ",
+          "name": "ComfyUI account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Lyrics Writer",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Title Maker",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lyrics Writer": {
+      "main": [
+        [
+          {
+            "node": "Title Maker",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Title Maker": {
+      "main": [
+        [
+          {
+            "node": "Genre & Style",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Genre & Style",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Image Prompt",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Image Prompt": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Genre & Style": {
+      "main": [
+        [
+          {
+            "node": "Image Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Convert to File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Lyrics Writer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File1": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Samaritan",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Samaritan": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "saveDataSuccessExecution": "none",
+    "saveManualExecutions": false,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "versionId": "d043675f-929e-4fa8-ad80-b54750c83679",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "f67686f3398935efe7a34f592b5446708e0af0fe88a6012d288da54a899070f5"
+  },
+  "id": "o7LHpL8E4KISTqJS",
+  "tags": []
+}
